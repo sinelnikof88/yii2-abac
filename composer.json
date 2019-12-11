@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "sinelnikof88\\abac\\": ""
+            "sinelnikof88\\abac\\": "src"
         }
     }
 }
