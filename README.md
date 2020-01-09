@@ -2,6 +2,17 @@ Abac access control module for Yii2
 ===================================
 Some realisation for assign role to user
 
+ВНИМАНИЕ!
+на настоящий момент этот репозиторий заморожен,
+реализация получилась неоправданно дорогой для веб приложения и слишком сложной для управления.
+Возможно в будущем буду дописывать этот модуль
+
+
+ATTENTION!
+this repository is currently frozen,
+the implementation turned out to be unreasonably expensive for a web application and too complicated to manage.
+Maybe in the future I will add this module
+
 Installation
 ------------
 
