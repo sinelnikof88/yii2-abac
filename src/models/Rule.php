@@ -16,6 +16,10 @@ use Yii;
  */
 class Rule extends \yii\db\ActiveRecord {
 
+    public static function find() {
+        return new ActiveQuery(get_called_class());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -57,6 +61,29 @@ class Rule extends \yii\db\ActiveRecord {
         ];
     }
 
+    public function getCode() {
+        if(!class_exists($this->class)){
+            return '!!Внимание клас не реализованн!!';
+        }
+        $func = new \ReflectionMethod($this->class, 'pre');
+
+        $f = $func->getFileName();
+        $start_line = $func->getStartLine() - 1;
+        $end_line = $func->getEndLine();
+        $length = $end_line - $start_line;
+
+        $source = file($f);
+        $source = implode('', array_slice($source, 0, count($source)));
+        // $source = preg_split("/(\n|\r\n|\r)/", $source);
+        $source = preg_split("/" . PHP_EOL . "/", $source);
+
+        $body = '';
+        for ($i = $start_line; $i < $end_line; $i++)
+            $body .= "{$source[$i]}\n";
+
+        return '<pre>' . $body . '</pre>';
+    }
+
     public function getClassList() {
 
         $setting = SettingsForm::getConfig();
@@ -95,10 +122,6 @@ class Rule extends \yii\db\ActiveRecord {
                 'value' => new Expression('NOW()'),
             ],
         ];
-    }
-
-    public static function find() {
-        return new ActiveQuery(get_called_class());
     }
 
 }

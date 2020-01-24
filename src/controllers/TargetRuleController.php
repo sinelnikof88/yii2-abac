@@ -119,4 +119,20 @@ class TargetRuleController extends Controller {
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    public function actionAllRules($id) {
+        $model = $this->findModel($id);
+
+        $allTargets = \yii\helpers\ArrayHelper::getColumn(TargetRule::find()->asArray()->where(['target_id' => $model->target])->all(), 'policy_id');
+
+        $poli = \yii\helpers\ArrayHelper::getColumn(\sinelnikof88\abac\models\PolicyRule::findAll(['policy_id' => $allTargets]), 'rule_id');
+        $poli = \yii\helpers\ArrayHelper::getColumn(\sinelnikof88\abac\models\PolicyRule::findAll(['rule_id' => array_unique($poli)]), 'policy_id');
+        $poli = \yii\helpers\ArrayHelper::getColumn(\sinelnikof88\abac\models\PolicyRule::findAll(['policy_id' => array_unique($poli)]), 'rule_id');
+        $poli = \sinelnikof88\abac\models\Rule::find()->where(['id' => array_unique($poli)])->all();
+        $dataProvider = new \yii\data\ArrayDataProvider(['allModels' => $poli]);
+        return $this->renderAjax('all-rules', ['dataProvider' => $dataProvider]);
+    }
+    protected function get($param) {
+        
+    }
+
 }

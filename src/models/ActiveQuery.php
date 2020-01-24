@@ -18,7 +18,7 @@ class ActiveQuery extends \yii\db\ActiveQuery {
      * @return \common\models\basic\activeRecord\AccessMatrixColumns[]|array
      */
     public function all($db = null) {
-        $this->where(['is', 'is_delete', null]);
+        $this->andWhere(['is', 'is_delete', null]);
         return parent::all($db);
     }
 
@@ -27,7 +27,7 @@ class ActiveQuery extends \yii\db\ActiveQuery {
      * @return \common\models\basic\activeRecord\AccessMatrixColumns|array|null
      */
     public function one($db = null) {
-        $this->where(['is', 'is_delete', null]);
+        $this->andWhere(['is', 'is_delete', null]);
 
         return parent::one($db);
     }

@@ -5,14 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use \yii;
+
+namespace sinelnikof88\abac\interfaces;
+
 /**
- * Description of RulesCollection
- * коллекция правил для определенной роли пользователяы
+ * Description of IRule
+ *
  * @author Gonnyh.I
  */
-class RulesCollection {
+interface IRule {
 
- 
-
+    public function pre(\yii\db\ActiveQuery $query);
 }

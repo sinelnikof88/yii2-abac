@@ -13,22 +13,22 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
 
-<div class="policy-create">
+    <div class="policy-create">
 
-     <?=  \common\extensions\box\Box::widget([
-       'name' => 'policy',
-       'id' => 'policy_box_create',
-       'info' => $this->title,
-       'btn' => [
-            Html::a('Управление', ['index'], ['class' => 'btn btn-primary']),
-          ],
-       'is_collapsed' => false,
-       'text' =>$this->render('_form', [
-        'model' => $model,
-    
+        <?=
+        \common\extensions\box\Box::widget([
+            'name' => 'policy',
+            'id' => 'policy_box_create',
+            'info' => $this->title,
+            'btn' => [
+                Html::a('Управление', ['index'], ['class' => 'btn btn-primary']),
+            ],
+            'is_collapsed' => false,
+            'text' => $this->render('_form', [
+                'model' => $model,
+            ])
         ])
-    ])
-    ?>
+        ?>
 
-</div>
+    </div>
 </div>

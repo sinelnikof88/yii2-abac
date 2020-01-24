@@ -24,10 +24,7 @@ class DeleteBehavior extends \yii\base\Behavior {
     public function beforeDelete($event) {
 
         $this->owner->is_delete = 1;
-        if (!$this->owner->save()) {
-            print_r($this->owner->getErrors());
-            exit;
-        };
+        !$this->owner->save();
         $event->isValid = false;
         return $event->isValid;
     }

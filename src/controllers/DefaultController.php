@@ -26,19 +26,7 @@ class DefaultController extends Controller {
         return $this->render('index');
     }
 
-    public function actionSetting() {
-        $model = \sinelnikof88\abac\models\SettingsForm::getConfig();
-        if ($model->load(Yii::$app->request->post())) {
-            if (!Yii::$app->request->isPjax) {
-                if ($model->save()) {
-                    return true;
-//                    return $this->redirect(['request/view', 'id' => $model->request->ID]);
-                }
-            }
-        }
-        return $this->render('setting', ['model' => $model]);
-    }
-
+  
     public function actionCheckDatabase() {
         $this->renderAjax('check-database');
     }

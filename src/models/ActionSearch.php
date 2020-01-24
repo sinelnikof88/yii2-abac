@@ -9,13 +9,12 @@ use sinelnikof88\abac\models\Action;
 /**
  * ActionSearch represents the model behind the search form of `sinelnikof88\abac\models\Action`.
  */
-class ActionSearch extends Action
-{
+class ActionSearch extends Action {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'is_active', 'is_delete'], 'integer'],
             [['name', 'class', 'date_create', 'date_update'], 'safe'],
@@ -25,8 +24,7 @@ class ActionSearch extends Action
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class ActionSearch extends Action
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Action::find();
 
         // add conditions that should always apply here
@@ -66,8 +63,9 @@ class ActionSearch extends Action
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'class', $this->class]);
+                ->andFilterWhere(['like', 'class', $this->class]);
 
         return $dataProvider;
     }
+
 }

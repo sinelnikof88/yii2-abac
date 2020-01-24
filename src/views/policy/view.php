@@ -52,6 +52,7 @@ yii\bootstrap\Modal::begin([
         'attributes' => [
             'id',
             'name',
+             
             'is_active',
             'date_create',
             'date_update',

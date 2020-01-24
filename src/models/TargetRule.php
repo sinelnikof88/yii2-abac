@@ -19,6 +19,10 @@ use Yii;
  */
 class TargetRule extends \yii\db\ActiveRecord {
 
+    public static function find() {
+        return new ActiveQuery(get_called_class());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -84,12 +88,16 @@ class TargetRule extends \yii\db\ActiveRecord {
         $setting = SettingsForm::getConfig();
         $targetClass = $setting->target;
         $models = $targetClass::find()->all();
-        return \common\components\ArrayHelper::map($models, 'id', 'name');
+        $list = \common\components\ArrayHelper::map($models, 'id', 'name');
+        asort($list);
+        return $list;
     }
 
     public function getRuleList() {
         $models = Rule::find()->all();
-        return \common\components\ArrayHelper::map($models, 'id', 'name');
+        $list = \common\components\ArrayHelper::map($models, 'id', 'name');
+        asort($list);
+        return $list;
     }
 
     public function getPolicy() {
@@ -102,10 +110,6 @@ class TargetRule extends \yii\db\ActiveRecord {
 
         $pk = $setting->target::primaryKey();
         return $this->hasOne($targetClass::className(), [current($pk) => 'target_id']);
-    }
-
-    public static function find() {
-        return new ActiveQuery(get_called_class());
     }
 
 }

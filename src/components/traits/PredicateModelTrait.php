@@ -15,24 +15,19 @@ namespace sinelnikof88\abac\components\traits;
  */
 trait PredicateModelTrait {
 
+    private $traitRules = [];
+
+    private function loadTraitRules() {
+        $policyCollection = \sinelnikof88\abac\components\PolicyCollection::instance();
+        $this->traitRules = $policyCollection->all();
+    }
+
     public function pre() {
-
-
-        $policyCollection = new \sinelnikof88\abac\components\PolicyCollection();
-
-        foreach ($policyCollection->all() as $value) {
-             $value->pre($this);
+        $this->loadTraitRules();
+        foreach ($this->traitRules as $value) {
+            $value->pre($this);
         }
-//        echo '<pre>';
-//        print_r($this); 
-//        exit;
-//        
-//        print_r($policyCollection->all()); exit; 
-////        $this->andWhere('[[PARENT_ID]]!=0');
-////        $this->andWhere('[[REQ_TYPE_ID]]=489');
-//        $this->andWhere(['TIME_CREATE'=>'2019-12-27 13:13:52']);
-
-        return $this ;
+        return $this;
     }
 
 }

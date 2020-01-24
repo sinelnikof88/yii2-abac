@@ -19,6 +19,10 @@ use Yii;
  */
 class Policy extends \yii\db\ActiveRecord {
 
+    public static function find() {
+        return new ActiveQuery(get_called_class());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -76,14 +80,11 @@ class Policy extends \yii\db\ActiveRecord {
                     $query->andWhere(['is', 'policy_rule.is_delete', null]);
                 });
     }
+
     public function getTarget() {
         return $this->hasMany(TargetRule::className(), ['policy_id' => 'id'], function ($query) {
-//                    $query->andWhere(['is', 'policy_rule.is_delete', null]);
+                    $query->andWhere(['is', 'policy_rule.is_delete', null]);
                 });
-    }
-
-    public static function find() {
-        return new ActiveQuery(get_called_class());
     }
 
     public function behaviors() {

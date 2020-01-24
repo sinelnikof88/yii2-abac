@@ -13,6 +13,10 @@ namespace sinelnikof88\abac\components\rules;
  *
  * @author Gonnyh.I
  */
-class SupervisiorAsAtol extends \sinelnikof88\abac\components\BasicRule{
-    //put your code here
+class DefaultRule extends \sinelnikof88\abac\components\BasicRule {
+
+    public function pre(\yii\db\ActiveQuery $query) {
+        parent::pre($query);
+    }
+
 }

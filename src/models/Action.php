@@ -20,6 +20,10 @@ use Yii;
  */
 class Action extends \yii\db\ActiveRecord {
 
+    public static function find() {
+        return new ActiveQuery(get_called_class());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -65,10 +69,6 @@ class Action extends \yii\db\ActiveRecord {
             'is_active' => 'Is Active',
             'is_delete' => 'Is Delete',
         ];
-    }
-
-    public static function find() {
-        return new ActiveQuery(get_called_class());
     }
 
     public function behaviors() {

@@ -53,6 +53,7 @@ yii\bootstrap\Modal::begin([
             'id',
             'name',
             'class',
+            'code:raw',
             ],
         ])
     ])?>

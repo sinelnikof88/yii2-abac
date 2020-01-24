@@ -11,6 +11,7 @@ use sinelnikof88\abac\models\Rule;
  */
 class RuleSearch extends Rule
 {
+    
     /**
      * {@inheritdoc}
      */

@@ -35,7 +35,6 @@ class Module extends \yii\base\Module {
             \Yii::configure($this, require __DIR__ . '/config.php');
         }
 
-        print_r($this->config);
         return parent::init();
     }
 

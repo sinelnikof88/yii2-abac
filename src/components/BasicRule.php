@@ -12,21 +12,16 @@ namespace sinelnikof88\abac\components;
  * Description of BasicRule
  *
  * @author Gonnyh.I
+ * 
+ * 
+ *  public function pre(\yii\db\ActiveQuery $query) {
+  return $query;
+  }
  */
-class BasicRule {
+abstract class BasicRule implements \sinelnikof88\abac\interfaces\IRule {
 
-    public $user = false;
+     
 
-    public function __construct() {
-        $this->user = \Yii::$app->user->identity;
-    }
-
-    /**
-     *  тут будем собирать трейты для придектов 
-     * @param \yii\db\ActiveQuery $query
-     * @return \yii\db\ActiveQuery
-     * @example $query->where(['>', 'REQ_R_ID', '123']);
-     */
     public function pre(\yii\db\ActiveQuery $query) {
         return $query;
     }

@@ -39,6 +39,7 @@ class PolicyController extends Controller {
         $searchModel = new PolicySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,

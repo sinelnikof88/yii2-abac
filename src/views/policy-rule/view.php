@@ -52,6 +52,7 @@ yii\bootstrap\Modal::begin([
                 'attributes' => [
                     'id',
                     'rule.name',
+                    'rule.code:raw',
                     'policy.name',
                     [
                         'label' => 'variables',

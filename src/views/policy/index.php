@@ -24,6 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id' => 'policy_box_index',
             'info' => $this->title,
             'btn' => [
+               Html::a('Настройки', \yii\helpers\Url::to(['./setting']), ['class' => 'btn btn-warning']),
+                Html::a('Политики', \yii\helpers\Url::to(['./policy']), ['class' => 'btn btn-primary']),
+                Html::a('Связи политики и правил', \yii\helpers\Url::to(['./policy-rule']), ['class' => 'btn btn-primary']),
+                Html::a('Правила', \yii\helpers\Url::to(['./rule']), ['class' => 'btn btn-primary']),
+                Html::a('Назначения', \yii\helpers\Url::to(['./target-rule']), ['class' => 'btn btn-success']),
+                Html::a('Действия', \yii\helpers\Url::to(['./action']), ['class' => 'btn btn-primary']),
+                Html::a('Стенд', \yii\helpers\Url::to(['stand']), ['class' => 'btn btn-danger']),
+                '----------',
                 Html::a('Управление', ['index'], ['class' => 'btn btn-primary']),
                 Html::a('Добавить', ['create'], ['class' => 'btn btn-success']),
             ],
@@ -41,7 +49,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'label' => 'Назначения',
                         'value' => function ($model) {
-                            return GridView::widget([
+                            return yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
+                                        'size' => 'modal-lg',
+                                        'class' => 'btn btn-xs btn-warning',
+                                        'data-pjax' => '0',
+                                        'title' => 'Добавление нового назначения',
+                                        'onclick' => '
+                                    $.pjax({
+                                        type: "GET", 
+                                        url: "/abac/policy/add-target/' . $model->id . '",
+                                        container: "#pjaxModalUniversal",
+                                        push: false,
+                                        timeout: 10000,
+                                        scrollTo: false
+                                    })'
+                                    ]) .
+                                    GridView::widget([
                                         'layout' => " {items} ",
                                         'showHeader' => false,
                                         'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $model->target]),
@@ -57,6 +80,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     $.pjax({
                                                         type: "GET",
                                                         url: "' . Url::to(['/abac/target-rule/view/', 'id' => $param->id]) . '",
+                                                        container: "#pjaxModalUniversal",
+                                                        push: false,
+                                                        timeout: 10000,
+                                                        scrollTo: false
+                                                    })'
+                                                    ]);
+                                                }
+                                            ],
+                                            [
+                                                'format' => 'raw',
+                                                'value' => function ($param) {
+                                                    return Html::a('<i class="fas fa-satellite"></i>', 'javascript:void(0);', [
+                                                                'class' => 'text-info',
+                                                                'title' => Yii::t('app', 'Все правила для роли'),
+                                                                'onclick' => '
+                                                    $.pjax({
+                                                        type: "GET",
+                                                        url: "' . Url::to(['/abac/target-rule/all-rules/', 'id' => $param->id]) . '",
                                                         container: "#pjaxModalUniversal",
                                                         push: false,
                                                         timeout: 10000,
@@ -91,7 +132,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'label' => 'Правила',
                         'value' => function ($model) {
-                            return GridView::widget([
+                            return
+                                    yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
+                                        'size' => 'modal-lg',
+                                        'class' => 'btn btn-xs btn-info',
+                                        'data-pjax' => '0',
+                                        'title' => 'Добавление нового правила',
+                                        'onclick' => '
+                                    $.pjax({
+                                        type: "GET",
+                                         url: "/abac/policy/add-rule/' . $model->id . '",
+                                        container: "#pjaxModalUniversal",
+                                        push: false,
+                                        timeout: 10000,
+                                        scrollTo: false
+                                    })'
+                                    ])
+                                    .
+                                    GridView::widget([
                                         'layout' => " {items} ",
                                         'showHeader' => false,
                                         'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $model->policyRules]),
@@ -138,50 +196,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'date_create',
-                    'date_update',
-                    //'is_delete',
                     [
                         'class' => yii\grid\ActionColumn::className(),
-                        'template' => '{add-target} {add-rule} {view}  {update}  {delete}',
+                        'template' => '  {view}  {update}  {delete}',
                         'buttons' => [
-                            'add-target' => function ($url, $model, $key) {
-
-                                return yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
-                                            'size' => 'modal-lg',
-                                            'class' => 'btn btn-xs btn-warning',
-                                            'data-pjax' => '0',
-                                            'title' => 'Добавление нового назначения',
-                                            'onclick' => '
-                                    $.pjax({
-                                        type: "GET",
-                                        url: "' . $url . '",
-                                        container: "#pjaxModalUniversal",
-                                        push: false,
-                                        timeout: 10000,
-                                        scrollTo: false
-                                    })'
-                                ]);
-                            },
-                            'add-rule' => function ($url, $model, $key) {
-
-                                return yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
-                                            'size' => 'modal-lg',
-                                            'class' => 'btn btn-xs btn-info',
-                                            'data-pjax' => '0',
-                                            'title' => 'Добавление нового правила',
-                                            'onclick' => '
-                                    $.pjax({
-                                        type: "GET",
-                                        url: "' . $url . '",
-                                        container: "#pjaxModalUniversal",
-                                        push: false,
-                                        timeout: 10000,
-                                        scrollTo: false
-                                    })'
-                                ]);
-                            },
                             'view' => function ($url, $model, $key) {
-
                                 return yii\helpers\Html::button('<i class="fas fa-eye"></i>', [
                                             'size' => 'modal-lg',
                                             'class' => 'btn btn-xs btn-success',

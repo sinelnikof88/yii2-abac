@@ -2,17 +2,6 @@ Abac access control module for Yii2
 ===================================
 Some realisation for assign role to user
 
-ВНИМАНИЕ!
-на настоящий момент этот репозиторий заморожен,
-реализация получилась неоправданно дорогой для веб приложения и слишком сложной для управления.
-Возможно в будущем буду дописывать этот модуль
-
-
-ATTENTION!
-this repository is currently frozen,
-the implementation turned out to be unreasonably expensive for a web application and too complicated to manage.
-Maybe in the future I will add this module
-
 Installation
 ------------
 
@@ -40,3 +29,21 @@ Once the extension is installed, simply use it in your code by  :
 
 ```php
 <?= \sinelnikof88\abac\AutoloadExample::widget(); ?>```
+
+Подключение к базе
+// это имя используетья в модуле
+'abac' => [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=accsess',
+    'username' => 'mysqlUser',
+    'password' => 'MysqlPasswd',
+    'charset' => 'utf8',
+],
+
+// подключение трейтов
+для того что бы модель работала с придекатами нужно в поисковой модели прописать
+class User  extends \yii\db\ActiveQuery
+{
+    use \sinelnikof88\abac\components\traits\PredicateModelTrait;
+.....
+}
