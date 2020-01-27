@@ -47,3 +47,25 @@ class User  extends \yii\db\ActiveQuery
     use \sinelnikof88\abac\components\traits\PredicateModelTrait;
 .....
 }
+
+--------------------------------
+в конфиге консоли
+
+'migrate-abac' => [
+    'class' => 'yii\console\controllers\MigrateController',
+    'migrationNamespaces' => ['sinelnikof88\abac\migrations'],
+ ],
+
+ ./yii migrate-abac/up
+--------------------------------
+ 'components' => [
+....
+        'abac' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=accsess',
+            'username' => '...user...',
+            'password' => '...pass...',
+            'charset' => 'utf8',
+        ],
+....
+],
