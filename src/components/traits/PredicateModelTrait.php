@@ -20,10 +20,14 @@ trait PredicateModelTrait {
     private function loadTraitRules() {
         $policyCollection = \sinelnikof88\abac\components\PolicyCollection::instance();
         $this->traitRules = $policyCollection->all();
+        if(empty($this->traitRules )){
+            $this->where('1=2 -- ABAC Правило запрета выборки для ограничения выводимых данных  ');
+        }
     }
 
     public function pre() {
         $this->loadTraitRules();
+        
         foreach ($this->traitRules as $value) {
             $value->pre($this);
         }

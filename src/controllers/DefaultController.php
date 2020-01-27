@@ -26,9 +26,12 @@ class DefaultController extends Controller {
         return $this->render('index');
     }
 
-  
     public function actionCheckDatabase() {
         $this->renderAjax('check-database');
+    }
+
+    public function actionImport() {
+        \Yii::$app->runAction('migrate', ['migrationPath' => '/']);
     }
 
     public function actionStand() {
@@ -40,7 +43,7 @@ class DefaultController extends Controller {
                 }
             }
         }
-        return $this->render('stand', ['model'=>$model]);
+        return $this->render('stand', ['model' => $model]);
     }
 
 }
