@@ -130,6 +130,14 @@ class PolicyController extends Controller {
         }
         return $this->renderAjax('add-rule', ['model' => $model]);
     }
+    public function actionAddAction($id) {
+        $model = new \sinelnikof88\abac\models\PolicyAction();
+        $model->policy_id = $id;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(\yii\helpers\Url::previous());
+        }
+        return $this->renderAjax('add-action', ['model' => $model]);
+    }
 
     public function actionAddTarget($id) {
         $model = new \sinelnikof88\abac\models\TargetRule();

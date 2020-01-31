@@ -69,3 +69,5 @@ class User  extends \yii\db\ActiveQuery
         ],
 ....
 ],
+
+![description](image/1.bmp)

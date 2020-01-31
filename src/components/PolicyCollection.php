@@ -24,13 +24,15 @@ class PolicyCollection extends yii\base\Model {
     }
 
     function all() {
-        $t = \sinelnikof88\abac\models\TargetRule::instance()->getTargetList();
         $attr = \Yii::$app->user->identity->filtredAttributes;
-        if(empty($attr)){
+        if (empty($attr)) {
             throw new \sinelnikof88\abac\ABACException('Доступ ограничен так как не установленны права', 403);
         }
 
-        $targets = \sinelnikof88\abac\models\TargetRule::find()->with('policy')->with('policy.rules')->asArray()->where(['target_id' => $attr])->all();
+
+        $targets = \sinelnikof88\abac\models\TargetRule::getDb()->cache(function ($db)use ($attr) {
+            return \sinelnikof88\abac\models\TargetRule::find()->with('policy')->with('policy.rules')->asArray()->where(['target_id' => $attr])->all();
+        });
 
         $classesNames = [];
         try {

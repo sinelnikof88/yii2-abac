@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <div class="col-lg-6">
         <div class="col-lg-12">
-            <?= $form->field($model, 'rule_namespace')->textInput()->hint('Пространство имен классов для проерок') ?>
+            <?= $form->field($model, 'rule_namespace')->textInput()->hint('Пространство имен классов для проверок') ?>
         </div>
         <div class="col-lg-12">
             <?= $form->field($model, 'rule_directory')->textInput()->hint('Местоположение на сервере (путь до директории вкоторой лежат классы для проверки) /var/www/....') ?>
@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <div class="col-lg-6">
         <div class="col-lg-12">
-            <?= $form->field($model, 'action_namespace')->textInput()->hint('Пространство имен классов для проерок') ?>
+            <?= $form->field($model, 'action_namespace')->textInput()->hint('Пространство имен классов для проверок') ?>
         </div>
         <div class="col-lg-12">
             <?= $form->field($model, 'action_directory')->textInput()->hint('Местоположение на сервере (путь до директории вкоторой лежат классы для проверки) /var/www/....') ?>

@@ -90,6 +90,17 @@ class PolicyRule extends \yii\db\ActiveRecord {
     }
 
     public function getRuleList() {
+        
+        
+          $oldRolesIds = PolicyRule::find()->where(['policy_id' => $this->policy_id])->andWhere(['is', 'is_delete', null])->asArray()->select(['rule_id'])->column();
+        $models = Rule::find()->where(['not in', 'id', $oldRolesIds])->all();
+        $list = \common\components\ArrayHelper::map($models, 'id', 'name');
+        asort($list);
+        return $list;
+        
+        
+        
+        
         $models = Rule::find()->all();
         $list = \common\components\ArrayHelper::map($models, 'id', 'name');
         asort($list);

@@ -14,15 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'class')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date_create')->textInput() ?>
-
-    <?= $form->field($model, 'date_update')->textInput() ?>
-
-    <?= $form->field($model, 'is_active')->textInput() ?>
-
-    <?= $form->field($model, 'is_delete')->textInput() ?>
+     <?= $form->field($model, 'class')->dropDownList($model->classList) ?>
+ 
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

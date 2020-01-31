@@ -14,6 +14,7 @@ namespace sinelnikof88\abac\components\traits;
  * @author Gonnyh.I
  */
 trait PredicateModelTrait {
+    
 
     private $traitRules = [];
 
@@ -21,7 +22,7 @@ trait PredicateModelTrait {
         $policyCollection = \sinelnikof88\abac\components\PolicyCollection::instance();
         $this->traitRules = $policyCollection->all();
         if(empty($this->traitRules )){
-            $this->where('1=2 -- ABAC Правило запрета выборки для ограничения выводимых данных  ');
+//            $this->where('1=2 -- ABAC Правило запрета выборки для ограничения выводимых данных  ');
         }
     }
 

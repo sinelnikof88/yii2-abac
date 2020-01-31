@@ -74,9 +74,20 @@ class Policy extends \yii\db\ActiveRecord {
                     $query->andWhere(['is', 'policy_rule.is_delete', null]);
                 });
     }
+    public function getActions() {
+        return $this->hasMany(Action::className(), ['id' => 'action_id'])->viaTable('policy_action', ['policy_id' => 'id'], function ($query) {
+                    $query->andWhere(['is', 'policy_action.is_delete', null]);
+                });
+    }
 
     public function getPolicyRules() {
         return $this->hasMany(PolicyRule::className(), ['policy_id' => 'id'], function ($query) {
+                    $query->andWhere(['is', 'policy_rule.is_delete', null]);
+                });
+    }
+
+    public function getPolicyActions() {
+        return $this->hasMany(PolicyAction::className(), ['policy_id' => 'id'], function ($query) {
                     $query->andWhere(['is', 'policy_rule.is_delete', null]);
                 });
     }
