@@ -69,6 +69,5 @@ class User  extends \yii\db\ActiveQuery
         ],
 ....
 ],
-
-
- ![Image alt](image/1.bmp)
+ 
+![asd](https://user-images.githubusercontent.com/58765150/73518913-27806180-4432-11ea-96e2-8a5719ef0684.png)
