@@ -70,4 +70,6 @@ class User  extends \yii\db\ActiveQuery
 ....
 ],
 
-![Image description](https://github.com/sinelnikof88/yii2-abac/raw/master/image/1.bmp)
+
+![2020-01-31_135520](https://user-images.githubusercontent.com/58765150/73518610-6235ca00-4431-11ea-886c-143734370149.png)
+
