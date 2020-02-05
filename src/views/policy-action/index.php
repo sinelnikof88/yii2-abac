@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 Html::a('Правила', \yii\helpers\Url::to(['./rule']), ['class' => 'btn btn-primary']),
                 Html::a('Назначения', \yii\helpers\Url::to(['./target-rule']), ['class' => 'btn btn-success']),
                 Html::a('Действия', \yii\helpers\Url::to(['./action']), ['class' => 'btn btn-primary']),
+                Html::a('Элементы', \yii\helpers\Url::to(['./element']), ['class' => 'btn btn-primary']),
                 Html::a('Стенд', \yii\helpers\Url::to(['stand']), ['class' => 'btn btn-danger']),
                 '----------',
                 Html::a('Управление', ['index'], ['class' => 'btn btn-primary']),

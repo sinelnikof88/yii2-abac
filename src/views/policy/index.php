@@ -24,12 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id' => 'policy_box_index',
             'info' => $this->title,
             'btn' => [
-               Html::a('Настройки', \yii\helpers\Url::to(['./setting']), ['class' => 'btn btn-warning']),
+                Html::a('Настройки', \yii\helpers\Url::to(['./setting']), ['class' => 'btn btn-warning']),
                 Html::a('Политики', \yii\helpers\Url::to(['./policy']), ['class' => 'btn btn-primary']),
                 Html::a('Связи политики и правил', \yii\helpers\Url::to(['./policy-rule']), ['class' => 'btn btn-primary']),
                 Html::a('Правила', \yii\helpers\Url::to(['./rule']), ['class' => 'btn btn-primary']),
                 Html::a('Назначения', \yii\helpers\Url::to(['./target-rule']), ['class' => 'btn btn-success']),
                 Html::a('Действия', \yii\helpers\Url::to(['./action']), ['class' => 'btn btn-primary']),
+                Html::a('Элементы', \yii\helpers\Url::to(['./element']), ['class' => 'btn btn-primary']),
                 Html::a('Стенд', \yii\helpers\Url::to(['stand']), ['class' => 'btn btn-danger']),
                 '----------',
                 Html::a('Управление', ['index'], ['class' => 'btn btn-primary']),
@@ -47,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    'is_active',
                     [
                         'format' => 'raw',
-                        'label' => 'Назначения',
+                        'label' => 'К кому применимо',
                         'value' => function ($model) {
                             return yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
                                         'size' => 'modal-lg',
@@ -130,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'format' => 'raw',
-                        'label' => 'Правила',
+                        'label' => 'Правила построения запросов',
                         'value' => function ($model) {
                             return
                                     yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
@@ -197,7 +198,74 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'format' => 'raw',
-                        'label' => 'Доступ к элементам сайта',
+                        'label' => 'Правила отображения элементов на странице',
+                        'value' => function ($model) {
+                            return
+                                    yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
+                                        'size' => 'modal-lg',
+                                        'class' => 'btn btn-xs btn-info',
+                                        'data-pjax' => '0',
+                                        'title' => 'Добавление нового правила',
+                                        'onclick' => '
+                                    $.pjax({
+                                        type: "GET",
+                                         url: "/abac/policy/add-element/' . $model->id . '",
+                                        container: "#pjaxModalUniversal",
+                                        push: false,
+                                        timeout: 10000,
+                                        scrollTo: false
+                                    })'
+                                    ])
+                                    .
+                                    GridView::widget([
+                                        'layout' => " {items} ",
+                                        'showHeader' => false,
+                                        'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $model->policyElements]),
+                                        'columns' => [
+//                                            'name',
+                                            [
+                                                'format' => 'raw',
+                                                'value' => function ($param) {
+                                                    return Html::a('<i class="fa fa-eye"></i>', 'javascript:void(0);', [
+                                                                'class' => 'text-info',
+                                                                'title' => Yii::t('app', 'Просмотр элемента'),
+                                                                'onclick' => '
+                                                    $.pjax({
+                                                        type: "GET",
+                                                        url: "' . Url::to(['/abac/policy-element/view/', 'id' => $param->id]) . '",
+                                                        container: "#pjaxModalUniversal",
+                                                        push: false,
+                                                        timeout: 10000,
+                                                        scrollTo: false
+                                                    })'
+                                                    ]);
+                                                }
+                                            ],
+                                            'element.name',
+                                            [
+                                                'class' => yii\grid\ActionColumn::className(),
+                                                'template' => '{delete}',
+                                                'buttons' => [
+                                                    'delete' => function ($url, $model, $key) {
+
+                                                        return Html::a('<i class="fa fa-trash"></i>', ['/abac/policy-element/delete/', 'id' => $model['id']], [
+                                                                    'class' => 'text-danger',
+                                                                    'title' => Yii::t('app', 'Удалить элемент'),
+                                                                    'data' => [
+                                                                        'confirm' => 'Are you sure you want to delete this item?',
+                                                                        'method' => 'post',
+                                                                    ],
+                                                        ]);
+                                                    },
+                                                ]
+                                            ]
+                                        ]
+                            ]);
+                        }
+                    ],
+                    [
+                        'format' => 'raw',
+                        'label' => 'Доступ к дейставиям сайта URL',
                         'value' => function ($model) {
                             return
                                     yii\helpers\Html::button('<i class="fas fa-plus"></i>', [
@@ -221,7 +289,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'showHeader' => false,
                                         'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $model->policyActions]),
                                         'columns' => [
-                                      
                                             [
                                                 'format' => 'raw',
                                                 'value' => function ($param) {
@@ -240,7 +307,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     ]);
                                                 }
                                             ],
-                                                    
                                             'action.name',
                                             [
                                                 'class' => yii\grid\ActionColumn::className(),
@@ -263,7 +329,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         }
                     ],
-           
                     [
                         'class' => yii\grid\ActionColumn::className(),
                         'template' => '  {view}  {update}  {delete}',

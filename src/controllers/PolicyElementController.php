@@ -3,17 +3,17 @@
 namespace sinelnikof88\abac\controllers;
 
 use Yii;
-use sinelnikof88\abac\models\Policy;
-use sinelnikof88\abac\models\PolicySearch;
-use sinelnikof88\abac\components\Controller;
+use sinelnikof88\abac\models\PolicyElement;
+use sinelnikof88\abac\models\PolicyElementSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PolicyController implements the CRUD actions for Policy model.
+ * PolicyElementController implements the CRUD actions for PolicyElement model.
  */
-// class PolicyController extends Controller
-class PolicyController extends Controller {
+// class PolicyElementController extends Controller
+class PolicyElementController extends Controller {
 
     /**
      * {@inheritdoc}
@@ -30,16 +30,13 @@ class PolicyController extends Controller {
     }
 
     /**
-     * Lists all Policy models.
+     * Lists all PolicyElement models.
      * @return mixed
      */
     public function actionIndex() {
-        \yii\helpers\Url::remember();
-
-        $searchModel = new PolicySearch();
+        $searchModel = new PolicyElementSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
@@ -47,7 +44,7 @@ class PolicyController extends Controller {
     }
 
     /**
-     * Displays a single Policy model.
+     * Displays a single PolicyElement model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,15 +56,15 @@ class PolicyController extends Controller {
     }
 
     /**
-     * Creates a new Policy model.
+     * Creates a new PolicyElement model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new Policy();
+        $model = new PolicyElement();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(\yii\helpers\Url::previous());
         }
 
         return $this->render('create', [
@@ -76,7 +73,7 @@ class PolicyController extends Controller {
     }
 
     /**
-     * Updates an existing Policy model.
+     * Updates an existing PolicyElement model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +92,7 @@ class PolicyController extends Controller {
     }
 
     /**
-     * Deletes an existing Policy model.
+     * Deletes an existing PolicyElement model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,56 +101,22 @@ class PolicyController extends Controller {
     public function actionDelete($id) {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(\yii\helpers\Url::previous());
     }
 
     /**
-     * Finds the Policy model based on its primary key value.
+     * Finds the PolicyElement model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Policy the loaded model
+     * @return PolicyElement the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = Policy::findOne($id)) !== null) {
+        if (($model = PolicyElement::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function actionAddRule($id) {
-        $model = new \sinelnikof88\abac\models\PolicyRule();
-        $model->policy_id = $id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(\yii\helpers\Url::previous());
-        }
-        return $this->renderAjax('add-rule', ['model' => $model]);
-    }
-    public function actionAddElement($id) {
-        $model = new \sinelnikof88\abac\models\PolicyElement();
-        $model->policy_id = $id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-             return $this->redirect(\yii\helpers\Url::previous());
-        }
-        return $this->renderAjax('add-element', ['model' => $model]);
-    }
-    public function actionAddAction($id) {
-        $model = new \sinelnikof88\abac\models\PolicyAction();
-        $model->policy_id = $id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(\yii\helpers\Url::previous());
-        }
-        return $this->renderAjax('add-action', ['model' => $model]);
-    }
-
-    public function actionAddTarget($id) {
-        $model = new \sinelnikof88\abac\models\TargetRule();
-        $model->policy_id = $id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(\yii\helpers\Url::previous());
-        }
-        return $this->renderAjax('add-target', ['model' => $model]);
     }
 
 }

@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     'id',
                     'policy.name',
-                    'rule.name',
+                    'element.name',
                     [
                         'format' => 'raw',
                         'label' => 'variables',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return \yii\helpers\VarDumper::dumpAsString($model->variables, 10, true);
                         }
                     ],
-                    'rule.class',
+                    'element.class',
 //            'variables',
                     'date_create',
                     //'date_update',

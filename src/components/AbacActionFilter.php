@@ -48,6 +48,9 @@ class AbacActionFilter extends Behavior {
 
     protected function checkPermission($controller, $action) {
         $result = true;
+        if($controller=='site'&& $action=='error'){
+            return true;
+        }
          foreach ($this->rules as $rule) {
             if ($rule->check($controller, $action) !== true) {
                 \yii::warning('Пользователю запрещен доступ ' . implode('/', [$controller, $action]) . ' По правилу :' . get_class($rule));

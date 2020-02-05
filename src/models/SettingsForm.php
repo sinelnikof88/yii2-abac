@@ -15,13 +15,14 @@ namespace sinelnikof88\abac\models;
  */
 class SettingsForm extends \yii\base\Model {
 
-    public $rule_namespace, $rule_directory, $target, $action_namespace, $action_directory;
+    public $rule_namespace, $rule_directory, $target, $action_namespace, $action_directory,$element_namespace,$element_directory;
 
     public function rules() {
         return [
             [['target'], 'safe'],
             [['rule_namespace', 'rule_directory'], 'safe'],
-            [['action_namespace', 'action_directory'], 'safe']
+            [['action_namespace', 'action_directory'], 'safe'],
+            [['element_namespace', 'element_directory'], 'safe'],
         ];
     }
 
@@ -31,6 +32,9 @@ class SettingsForm extends \yii\base\Model {
             'rule_directory' => 'правила',
             'action_namespace' => 'пространство имен классов с действиями',
             'action_directory' => 'Директория с классами действий',
+            
+            'element_namespace'=>'Элементы на страницах',
+            'element_directory'=>'Элементы на страницах',
             'target' => 'целевой класс',
         ];
     }
