@@ -24,8 +24,8 @@ class ActionCollection extends yii\base\Model {
     }
 
     function all() {
-        if (!\Yii::$app->user->identity) {
-            throw new \sinelnikof88\abac\ABACException('Доступ ограничен так как пользователь неавторизован', 403);
+        if(!\Yii::$app->user->identity){
+            throw new \sinelnikof88\abac\ABACException('Доступ ограничен так как не установленны права', 403);
         }
         $attr = \Yii::$app->user->identity->filtredAttributes;
         if (empty($attr)) {
