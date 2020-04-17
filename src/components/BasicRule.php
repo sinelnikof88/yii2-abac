@@ -21,7 +21,6 @@ namespace sinelnikof88\abac\components;
 class BasicRule implements \sinelnikof88\abac\interfaces\IRule {
 
     protected $cacheTime = 1; //Время кеширования запрососв
-
     public function pre(\yii\db\ActiveQuery $query) {
         return $query;
     }
