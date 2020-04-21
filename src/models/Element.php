@@ -46,7 +46,7 @@ class Element extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'class'], 'string', 'max' => 200],
+            [['name', 'class'], 'string', ],
         ];
     }
 
