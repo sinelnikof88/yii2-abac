@@ -51,7 +51,7 @@ class Policy extends \yii\db\ActiveRecord {
         return [
             [['is_active', 'is_delete'], 'integer'],
             [['date_create', 'date_update'], 'safe'],
-            [['name'], 'string', 'max' => 45],
+            [['name'], 'string', 'max' => 5000],
         ];
     }
 
