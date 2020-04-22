@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 
 
      <?= $form->field($model, 'class')->dropDownList($model->classList) ?>
+     <?= $form->field($model, 'description') ?>
  
 
     <div class="form-group">

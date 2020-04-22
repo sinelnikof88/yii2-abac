@@ -53,10 +53,10 @@ yii\bootstrap\Modal::begin([
             'id',
             'name',
              
-            'is_active',
-            'date_create',
-            'date_update',
-            'is_delete',
+//            'is_active',
+//            'date_create',
+//            'date_update',
+//            'is_delete',
             ],
         ])
     ])?>

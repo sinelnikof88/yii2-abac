@@ -16,52 +16,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 yii\bootstrap\Modal::begin([
-        'id' => 'modalBox',
-        'size' => 'modal-lg',
-        'clientOptions' => ['show' => true],
-        'options' => [
-            ''
-        ],
-    ]);
+    'id' => 'modalBox',
+    'size' => 'modal-lg',
+    'clientOptions' => ['show' => true],
+    'options' => [
+        ''
+    ],
+]);
 ?>    
 <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
 
-<div class="rule-view">
-  
-    <?=  \common\extensions\box\Box::widget([
-       'name' => 'rule',
-       'id' => 'rule_box_view',
-       'info' => $this->title,
-        'btn' => [
-            Html::a('Управление', ['index'], ['data-pjax' => '0','class' => 'btn btn-primary']),
-            Html::a('Добавить', ['create'], ['data-pjax' => '0','class' => 'btn btn-success']),
-            Html::a('Изменить', ['update','id' => $model->id], ['data-pjax' => '0','class' => 'btn btn-warning']),
-            Html::a('Просмотр', ['view', 'id' => $model->id], ['data-pjax' => '0','class' => 'btn btn-secondary']),
-            Html::a('Удалить', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Уверены что хотите удалить элемент?',
-                    'method' => 'post',
+    <div class="rule-view">
+
+        <?=
+        \common\extensions\box\Box::widget([
+            'name' => 'rule',
+            'id' => 'rule_box_view',
+            'info' => $this->title,
+            'btn' => [
+                Html::a('Управление', ['index'], ['data-pjax' => '0', 'class' => 'btn btn-primary']),
+                Html::a('Добавить', ['create'], ['data-pjax' => '0', 'class' => 'btn btn-success']),
+                Html::a('Изменить', ['update', 'id' => $model->id], ['data-pjax' => '0', 'class' => 'btn btn-warning']),
+                Html::a('Просмотр', ['view', 'id' => $model->id], ['data-pjax' => '0', 'class' => 'btn btn-secondary']),
+                Html::a('Удалить', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Уверены что хотите удалить элемент?',
+                        'method' => 'post',
+                    ],
+                ])
+            ],
+            'is_collapsed' => false,
+            'text' => DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'name',
+                    'class',
+                    'code:raw',
+                    'description'
                 ],
             ])
-        ],
-       
-       'is_collapsed' => false,
-       'text' =>DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'class',
-            'code:raw',
-            ],
         ])
-    ])?>
+        ?>
 
-</div>
+    </div>
 </div>
 <div class="clearfix"></div>
- <?php
+<?php
 yii\bootstrap\Modal::end();
- 
- 
+
