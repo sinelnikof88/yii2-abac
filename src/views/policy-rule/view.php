@@ -51,7 +51,7 @@ yii\bootstrap\Modal::begin([
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'policy.description',
+                    'rule.description',
                     'rule.name',
                     'rule.code:raw',
                     'policy.name',
