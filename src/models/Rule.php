@@ -105,6 +105,7 @@ class Rule extends \yii\db\ActiveRecord {
         if (empty($diffRules) && $this->class) {
             $resultArray[$this->class] = $this->class;
         }
+        asort($resultArray);
         return $resultArray;
     }
 
