@@ -51,6 +51,7 @@ yii\bootstrap\Modal::begin([
                 'model' => $model,
                 'attributes' => [
                     'id',
+                    'rule.description',
                     'rule.name',
                     'rule.code:raw',
                     'policy.name',
@@ -60,9 +61,9 @@ yii\bootstrap\Modal::begin([
                             return print_r($model->variables, 1);
                         }
                     ],
-                    'date_create',
-                    'date_update',
-                    'is_active',
+//                    'date_create',
+//                    'date_update',
+//                    'is_active',
                 ],
             ])
         ])

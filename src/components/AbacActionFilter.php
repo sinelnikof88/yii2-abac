@@ -28,6 +28,8 @@ class AbacActionFilter extends Behavior {
     }
 
     public function beforeAction($event) {
+        try {
+            
         $this->loadRules();
 
         $result = $this->checkPermission($event->action->controller->id, $event->action->id);
@@ -37,6 +39,10 @@ class AbacActionFilter extends Behavior {
             throw new \sinelnikof88\abac\HttpABACException('Доступ запрещен');
         }
         return $event->isValid;
+        } catch (\sinelnikof88\abac\ABACException $exc) {
+            $event->isValid=false;
+        }
+
     }
 
     protected $rules;

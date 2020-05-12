@@ -50,7 +50,7 @@ class Action extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['date_create', 'date_update'], 'safe'],
+            [['date_create', 'date_update','description'], 'safe'],
             [['is_active', 'is_delete'], 'integer'],
             [['name', 'class'], 'string', 'max' => 200],
         ];

@@ -47,6 +47,7 @@ class Rule extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['name', 'class'], 'string', 'max' => 200],
+            [['description'],'safe']
         ];
     }
 
@@ -56,8 +57,9 @@ class Rule extends \yii\db\ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Нзвание правила',
             'class' => 'Class',
+            'description' => 'Описание правила',
         ];
     }
 
